@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { getFunName } from '../helpers';
+
 
 class StorePicker extends React.Component {
     // constructor() {
@@ -9,10 +11,12 @@ class StorePicker extends React.Component {
     goToStore(event) {
         event.preventDefault();
 
-        console.log(this.storeInput.value)
         //first grab the text from the box
-        
+        const storeId = this.storeInput.value;
+
         //Second we're going to transition from / to /store/:storeid
+        // this.context.value.router.transitionTo(`/store/${storeId}`);
+        this.props.history.push(`/store/${storeId}`)
     }
     render() {
         return (
@@ -24,5 +28,9 @@ class StorePicker extends React.Component {
         )
     }
 }
+
+const MyContext = React.createContext({router: PropTypes.object});
+StorePicker.contextType = MyContext
+
 
 export default StorePicker;
